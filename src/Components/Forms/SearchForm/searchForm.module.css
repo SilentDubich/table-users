@@ -1,0 +1,18 @@
+.container__displayFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_inputItem__withoutBorders {
+    border: none;
+    border-radius: .25rem;
+    box-shadow: 0 0 .2rem #606060;
+}
+.container_inputItem__withoutBorders:focus {
+    outline: none;
+}
+
+.container_inputItem__paddings {
+    padding: .25rem .5rem;
+}

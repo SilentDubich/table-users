@@ -1,0 +1,29 @@
+.container_button__bigButton {
+    width: 7.5rem;
+}
+
+.container_button__smallButton {
+    width: 2.5rem;
+}
+
+.container_button__violetButton {
+    color: #fff;
+    background-color: #520099;
+    padding: .25rem .5rem;
+    transition: .25s;
+    border-radius: .25rem;
+    box-shadow: 0 0 .2rem #606060;
+    font-size: .75rem;
+    text-align: center;
+}
+
+.container_button__violetButton:hover {
+    cursor: pointer;
+    background-color: rgba(82, 0, 153, 0.75);
+    transition: .25s;
+}
+
+.container_button__disabledLowOpacity {
+    opacity: .5;
+    transition: .25s;
+}

@@ -9,8 +9,8 @@ export const User = props => {
     const itemsClasses = `${SCommon.container_items__width} ${SCommon.container_items__borders} ${SCommon.container_items__paddings}`
     const [more, setMoreInfo] = useState(false)
     return(
-        <div className={SUser.moreInfo_container__margin}>
-            <div onClick={() => setMoreInfo(true)} className={SCommon.container__flex}>
+        <div className={SUser.user_container__margin}>
+            <div onClick={() => setMoreInfo(!more)} className={SCommon.container__flex}>
                 <div className={itemsClasses}><span>{props.id}</span></div>
                 <div className={itemsClasses}><span>{props.fName}</span></div>
                 <div className={itemsClasses}><span>{props.lName}</span></div>
@@ -18,7 +18,7 @@ export const User = props => {
                 <div className={itemsClasses}><span>{props.phone}</span></div>
             </div>
             <div>
-                {more && <MoreInfo more={setMoreInfo} props={{...props}}/>}
+                {more && <MoreInfo props={{...props}}/>}
             </div>
         </div>
 

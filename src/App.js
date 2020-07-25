@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from "react-redux";
 import {
     addUserAction,
-    getUsersThunk, setPageAction,
+    getUsersThunk, setIsFetching, setPageAction,
     sortUsersAction,
     updateFormDataAction,
     updateSearchText
@@ -12,8 +12,8 @@ import {User} from "./Components/User/user";
 import {Header} from "./Components/Header/header";
 import {ButtonComp} from "./Components/Button/button";
 import SCommon from "./commonStyles.module.css"
-import {AddForm} from "./Components/Forms/addForm";
-import {SearchForm} from "./Components/Forms/searchForm";
+import {AddForm} from "./Components/Forms/AddForm/addForm";
+import {SearchForm} from "./Components/Forms/SearchForm/searchForm";
 import {Paginator} from "./Components/Paginator/paginator";
 import {Preloader} from "./Components/Preloader/preloader";
 
@@ -29,7 +29,7 @@ export const App = (props) => {
     }
     let users = []
         users = props.users
-            .filter((el, i) => i > (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el)
+            .filter((el, i) => i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el)
             .map( el => {
                 if (props.searchText.length === 0 || el.id.toString().match(pattern) || el.firstName.match(pattern) || el.lastName.match(pattern) || el.email.match(pattern)) {
                     return <User id={el.id} fName={el.firstName} lName={el.lastName} email={el.email}
@@ -41,12 +41,13 @@ export const App = (props) => {
         props.sortUsersAction(param, method)
         setMethod(!method)
     }
+    if (props.fetch) return <Preloader/>
+    //TODO: Fix search peoples and add validation and fix moreinfo for new users and sort-arrows
     return (
         <div>
-            {/*<Preloader/>*/}
             <div className={SCommon.container__flex}>
-                {!isChosen && <ButtonComp title={'Low data'} action={getUsers} arg={'low'}/> }
-                {!isChosen && <ButtonComp title={'Big data'} action={getUsers} arg={'high'}/>}
+                {!isChosen && <ButtonComp disabled={props.fetch} title={'Малый объем данных'} action={getUsers} arg={'low'}/> }
+                {!isChosen && <ButtonComp disabled={props.fetch} title={'Большой объем данных'} action={getUsers} arg={'high'}/>}
                 {isChosen && isAddingMode && <AddForm addingMode={setIsAddingMode} addUser={props.addUserAction} form={props.addingForm} updateFormdata={props.updateFormDataAction}/>}
                 {isChosen && !isAddingMode && <ButtonComp title={'Добавить'} action={setIsAddingMode} arg={true}/>}
             </div>
@@ -70,9 +71,11 @@ let mapStateToProps = state => {
         searchText: state.usersReducer.searchText,
         totalUsers: state.usersReducer.totalUsers,
         portionSize: state.usersReducer.portionSize,
-        page: state.usersReducer.currentPage
+        page: state.usersReducer.currentPage,
+        fetch: state.usersReducer.isFetching
     }
 }
 
 
-export const AppContainer = connect(mapStateToProps, {addUserAction, sortUsersAction, getUsersThunk, updateFormDataAction, updateSearchText, setPageAction})(App)
+export const AppContainer = connect(mapStateToProps,
+    {addUserAction, sortUsersAction, getUsersThunk, updateFormDataAction, updateSearchText, setPageAction, setIsFetching})(App)

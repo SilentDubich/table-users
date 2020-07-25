@@ -13,12 +13,16 @@ const UPDATE_SEARCH_TEXT = 'userReducer/updateSearchText'
 export const updateSearchText = text => ({type: UPDATE_SEARCH_TEXT, text})
 const SET_PAGE = 'userReducer/setPage'
 export const setPageAction = pageNumber => ({type: SET_PAGE, pageNumber})
+const SET_IS_FETCHING = 'userReducer/setIsFetching'
+export const setIsFetching = bool => ({type: SET_IS_FETCHING, bool})
 
 
 export const getUsersThunk = (dataType) => {
     return async dispatch => {
+        dispatch(setIsFetching(true))
         let data = await API.getUsers(dataType)
         dispatch(uploadAllUsersAction(data))
+        dispatch(setIsFetching(false))
     }
 }
 
@@ -43,6 +47,7 @@ let initialState = {
     totalUsers: 0,
     portionSize: 10,
     currentPage: 1,
+    isFetching: false,
     addingForm: {
         id: null,
         firstName: null,
@@ -56,7 +61,7 @@ let initialState = {
 export const usersInstructions = (state = initialState, action) => {
     switch (action.type) {
         case ADD_USER:
-            return {...state, users: [action.data, ...state.users]}
+            return {...state, users: [action.data, ...state.users], totalUsers: state.users.length + 1}
         case UPLOAD_ALL_USERS:
             return {...state, users: [...action.data], totalUsers: action.data.length}
         case SORT_USERS:
@@ -77,6 +82,8 @@ export const usersInstructions = (state = initialState, action) => {
             return {...state, searchText: action.text}
         case SET_PAGE:
             return {...state, currentPage: action.pageNumber}
+        case SET_IS_FETCHING:
+            return {...state, isFetching: action.bool}
         default:
             return state
     }
