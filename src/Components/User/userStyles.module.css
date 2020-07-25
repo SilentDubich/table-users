@@ -1,0 +1,10 @@
+.moreInfo_container__margin {
+    margin: 0 auto;
+}
+
+.moreInfo_textarea__width {
+    width: 20rem;
+    height: 8rem;
+    resize: none;
+}
+

@@ -1,0 +1,23 @@
+:root {
+    --width: 15rem
+}
+
+.container__flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_items__width {
+    width: var(--width);
+}
+
+.container_items__borders {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.container_items__paddings {
+    padding: .25rem;
+}
+
