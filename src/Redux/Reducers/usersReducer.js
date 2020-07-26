@@ -15,6 +15,8 @@ const SET_PAGE = 'userReducer/setPage'
 export const setPageAction = pageNumber => ({type: SET_PAGE, pageNumber})
 const SET_IS_FETCHING = 'userReducer/setIsFetching'
 export const setIsFetching = bool => ({type: SET_IS_FETCHING, bool})
+const SET_ADD_FORM_ERRORS = 'userReducer/setAddFormErrors'
+export const setAddFormErrors = errors => ({type: SET_ADD_FORM_ERRORS, errors})
 
 
 export const getUsersThunk = (dataType) => {
@@ -27,41 +29,35 @@ export const getUsersThunk = (dataType) => {
 }
 
 let initialState = {
-    users: [
-        {
-            id: null,
-            firstName: null,
-            lastName: null,
-            email: null,
-            phone: null,
-            address: {
-                streetAddress: null,
-                city: null,
-                state: null,
-                zip: null
-            },
-            description: null,
-        }
-    ],
+    users: [],
     pageSize: 50,
     totalUsers: 0,
     portionSize: 10,
     currentPage: 1,
     isFetching: false,
-    addingForm: {
-        id: null,
-        firstName: null,
-        lastName: null,
-        email: null,
-        phone: null
-    },
+    addingForm: {},
+    errors: {},
     searchText: ''
 }
 
 export const usersInstructions = (state = initialState, action) => {
     switch (action.type) {
         case ADD_USER:
-            return {...state, users: [action.data, ...state.users], totalUsers: state.users.length + 1}
+            let newUser = {
+                id: action.data.id,
+                firstName: action.data.firstName,
+                lastName: action.data.lastName,
+                email: action.data.email,
+                phone: action.data.phone,
+                address: {
+                    streetAddress: 'none',
+                    city: 'none',
+                    state: 'none',
+                    zip: 'none'
+                },
+                description: 'none',
+            }
+            return {...state, users: [newUser, ...state.users], totalUsers: state.users.length + 1}
         case UPLOAD_ALL_USERS:
             return {...state, users: [...action.data], totalUsers: action.data.length}
         case SORT_USERS:
@@ -84,6 +80,8 @@ export const usersInstructions = (state = initialState, action) => {
             return {...state, currentPage: action.pageNumber}
         case SET_IS_FETCHING:
             return {...state, isFetching: action.bool}
+        case SET_ADD_FORM_ERRORS:
+            return {...state, errors: action.errors}
         default:
             return state
     }

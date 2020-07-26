@@ -19,3 +19,13 @@
 .container_input__marginRight {
     margin-right: 1rem;
 }
+
+.errors_items__decor {
+    border-radius: .25rem;
+    box-shadow: 0 0 .2rem #606060;
+    text-align: center;
+    width: 20rem;
+    margin: 0 auto;
+    padding: .25rem .5rem;
+}
+

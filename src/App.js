@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from "react-redux";
 import {
     addUserAction,
-    getUsersThunk, setIsFetching, setPageAction,
+    getUsersThunk, setAddFormErrors, setIsFetching, setPageAction,
     sortUsersAction,
     updateFormDataAction,
     updateSearchText
@@ -19,36 +19,36 @@ import {Preloader} from "./Components/Preloader/preloader";
 
 export const App = (props) => {
     const [isChosen, setIsChosen] = useState(false)
-    const [method, setMethod] = useState(true)
     const [isAddingMode, setIsAddingMode] = useState(false)
-    let pattern = new RegExp(props.searchText, 'giu')
-    // let phonePattern = new RegExp('^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$', 'giy')
+    //Отправляет запрос на получение пользователей
     const getUsers = dataLength => {
         props.getUsersThunk(dataLength)
         setIsChosen(true)
     }
     let users = []
         users = props.users
-            .filter((el, i) => i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el)
-            .map( el => {
-                if (props.searchText.length === 0 || el.id.toString().match(pattern) || el.firstName.match(pattern) || el.lastName.match(pattern) || el.email.match(pattern)) {
+            // Первая строка фильтра позволяет искать нужную строку по всему массиву
+            .filter((el, i) => props.searchText.length !== 0 && i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el ||
+                i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el)
+            .map( (el, i) => {
+                let man = el.id + ' ' + el.firstName + ' ' + el.lastName + ' ' + el.email + ' ' + el.phone
+                if (props.searchText.length === 0 || man.toUpperCase().includes(props.searchText.toUpperCase(), 0))
+                {
                     return <User id={el.id} fName={el.firstName} lName={el.lastName} email={el.email}
                                  phone={el.phone} address={el.address} description={el.description}/>
                 }
             })
-
-    const filter = param => {
+    // По нажатию на стрелку сортирует столбец param - название столбца, method - по возрастанию или по убыванию
+    const filter = (param, method) => {
         props.sortUsersAction(param, method)
-        setMethod(!method)
     }
     if (props.fetch) return <Preloader/>
-    //TODO: Fix search peoples and add validation and fix moreinfo for new users and sort-arrows
     return (
         <div>
             <div className={SCommon.container__flex}>
                 {!isChosen && <ButtonComp disabled={props.fetch} title={'Малый объем данных'} action={getUsers} arg={'low'}/> }
                 {!isChosen && <ButtonComp disabled={props.fetch} title={'Большой объем данных'} action={getUsers} arg={'high'}/>}
-                {isChosen && isAddingMode && <AddForm addingMode={setIsAddingMode} addUser={props.addUserAction} form={props.addingForm} updateFormdata={props.updateFormDataAction}/>}
+                {isChosen && isAddingMode && <AddForm setErrors={props.setAddFormErrors} error={props.errors} addingMode={setIsAddingMode} addUser={props.addUserAction} form={props.addingForm} updateFormdata={props.updateFormDataAction}/>}
                 {isChosen && !isAddingMode && <ButtonComp title={'Добавить'} action={setIsAddingMode} arg={true}/>}
             </div>
             <div>
@@ -72,10 +72,12 @@ let mapStateToProps = state => {
         totalUsers: state.usersReducer.totalUsers,
         portionSize: state.usersReducer.portionSize,
         page: state.usersReducer.currentPage,
-        fetch: state.usersReducer.isFetching
+        fetch: state.usersReducer.isFetching,
+        errors: state.usersReducer.errors
     }
 }
 
 
 export const AppContainer = connect(mapStateToProps,
-    {addUserAction, sortUsersAction, getUsersThunk, updateFormDataAction, updateSearchText, setPageAction, setIsFetching})(App)
+    {addUserAction, sortUsersAction, getUsersThunk, updateFormDataAction, updateSearchText,
+        setPageAction, setIsFetching, setAddFormErrors})(App)

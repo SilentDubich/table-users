@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import SButton from "../Button/buttonStyles.module.css"
 import SPaginator from "./paginatorStyles.module.css"
+import SCommon from "./../../commonStyles.module.css"
+
 
 
 
@@ -15,7 +17,7 @@ export const Paginator = props => {
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPageNumber = (portionNumber - 1) * props.portionSize
     let rightPageNumber = portionNumber * props.portionSize;
-    const buttClasses = `${SButton.container_button__violetButton}`
+    const buttClasses = `${SButton.container_button__violetButton} ${SCommon.container__marginBottom}`
     let totalButtons = pages
         .filter(number => number > leftPageNumber && number <= rightPageNumber)
         .map(number => <button
