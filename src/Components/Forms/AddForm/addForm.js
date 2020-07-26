@@ -3,6 +3,7 @@ import {ButtonComp} from "../../Button/button";
 import SAddForm from "./addFormStyle.module.css"
 import {validator} from "../../Validators/validators";
 import SCommon from "../../../commonStyles.module.css"
+import {SearchForm} from "../SearchForm/searchForm";
 
 
 export const AddForm = props => {
