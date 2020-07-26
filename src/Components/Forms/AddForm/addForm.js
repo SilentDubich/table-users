@@ -25,6 +25,7 @@ export const AddForm = props => {
 
     const addUser = (data) => {
         let error = {}
+        setIsRequied(false)
         if (idRef.current.value && fNameRef.current.value && lNameRef.current.value && emailRef.current.value && phoneRef.current.value) {
             error = validator({id: data.id, fName: data.firstName, lName: data.lastName, email: data.email, phone: data.phone})
             props.setErrors(error)
@@ -32,7 +33,6 @@ export const AddForm = props => {
                 props.addUser(data)
                 props.updateFormdata({id: '', firstName: '', lastName: '', email: '', phone: ''})
                 props.addingMode(false)
-                setIsRequied(false)
             } else {
                 setIsErrors(true)
             }

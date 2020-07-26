@@ -11,7 +11,7 @@ export const SearchForm = props => {
     }
     return(
         <div className={`${SCommon.container__marginBottom} ${SSearchForm.container__displayFlex}`}>
-            <input placeholder={'Search'} className={`${SSearchForm.container_inputItem__withoutBorders} ${SSearchForm.container_inputItem__paddings}`} onChange={updateText} value={props.text} ref={searchRef}/>
+            <input placeholder={'Поиск'} className={`${SSearchForm.container_inputItem__withoutBorders} ${SSearchForm.container_inputItem__paddings}`} onChange={updateText} value={props.text} ref={searchRef}/>
         </div>
     )
 }

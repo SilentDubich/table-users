@@ -28,11 +28,11 @@ export const App = (props) => {
     let users = []
         users = props.users
             // Первая строка фильтра позволяет искать нужную строку по всему массиву
-            .filter((el, i) => props.searchText.length !== 0 && i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el ||
+            .filter((el, i) => props.searchText.length !== 0 ||
                 i >= (props.pageSize * (props.page - 1)) && i < (props.pageSize * props.page) && el)
             .map( (el, i) => {
                 let man = el.id + ' ' + el.firstName + ' ' + el.lastName + ' ' + el.email + ' ' + el.phone
-                if (props.searchText.length === 0 || man.toUpperCase().includes(props.searchText.toUpperCase(), 0))
+                if (props.searchText.length === 0 || man.toUpperCase().includes(props.searchText.toUpperCase()))
                 {
                     return <User id={el.id} fName={el.firstName} lName={el.lastName} email={el.email}
                                  phone={el.phone} address={el.address} description={el.description}/>

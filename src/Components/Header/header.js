@@ -9,7 +9,8 @@ export const Header = props => {
     const [lNameMethod, setLNameMethod] = useState(false)
     const [emailMethod, setEmailMethod] = useState(false)
     const [phoneMethod, setPhoneMethod] = useState(false)
-    const itemsClasses = `${SCommon.container_items__width} ${SCommon.container_items__borders} ${SCommon.container_items__paddings}`
+    const itemsClasses = `${SCommon.container_items__width} ${SCommon.container_items__borders} 
+    ${SCommon.container_items__paddings} ${SHeader.container_sortArrows__pointer}`
     return(
         <div className={SCommon.container__flex}>
             <div onClick={() => {
