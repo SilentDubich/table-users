@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/testFg/static/css/main.3826b3aa.chunk.css",
-    "main.js": "/testFg/static/js/main.e8220682.chunk.js",
-    "main.js.map": "/testFg/static/js/main.e8220682.chunk.js.map",
-    "runtime-main.js": "/testFg/static/js/runtime-main.9d680138.js",
-    "runtime-main.js.map": "/testFg/static/js/runtime-main.9d680138.js.map",
-    "static/js/2.393da01d.chunk.js": "/testFg/static/js/2.393da01d.chunk.js",
-    "static/js/2.393da01d.chunk.js.map": "/testFg/static/js/2.393da01d.chunk.js.map",
-    "index.html": "/testFg/index.html",
-    "precache-manifest.58ceb1559546a4b1711bbb9425c66b7c.js": "/testFg/precache-manifest.58ceb1559546a4b1711bbb9425c66b7c.js",
-    "service-worker.js": "/testFg/service-worker.js",
-    "static/css/main.3826b3aa.chunk.css.map": "/testFg/static/css/main.3826b3aa.chunk.css.map",
-    "static/js/2.393da01d.chunk.js.LICENSE.txt": "/testFg/static/js/2.393da01d.chunk.js.LICENSE.txt",
-    "static/media/Spinner-1.4s-3a356a.svg": "/testFg/static/media/Spinner-1.4s-3a356a.4b7d2a00.svg"
+    "main.css": "/testFG/static/css/main.3826b3aa.chunk.css",
+    "main.js": "/testFG/static/js/main.50b6a97f.chunk.js",
+    "main.js.map": "/testFG/static/js/main.50b6a97f.chunk.js.map",
+    "runtime-main.js": "/testFG/static/js/runtime-main.7891dc93.js",
+    "runtime-main.js.map": "/testFG/static/js/runtime-main.7891dc93.js.map",
+    "static/js/2.393da01d.chunk.js": "/testFG/static/js/2.393da01d.chunk.js",
+    "static/js/2.393da01d.chunk.js.map": "/testFG/static/js/2.393da01d.chunk.js.map",
+    "index.html": "/testFG/index.html",
+    "precache-manifest.50053d1f744b5780c03808f4851871d2.js": "/testFG/precache-manifest.50053d1f744b5780c03808f4851871d2.js",
+    "service-worker.js": "/testFG/service-worker.js",
+    "static/css/main.3826b3aa.chunk.css.map": "/testFG/static/css/main.3826b3aa.chunk.css.map",
+    "static/js/2.393da01d.chunk.js.LICENSE.txt": "/testFG/static/js/2.393da01d.chunk.js.LICENSE.txt",
+    "static/media/Spinner-1.4s-3a356a.svg": "/testFG/static/media/Spinner-1.4s-3a356a.4b7d2a00.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9d680138.js",
+    "static/js/runtime-main.7891dc93.js",
     "static/js/2.393da01d.chunk.js",
     "static/css/main.3826b3aa.chunk.css",
-    "static/js/main.e8220682.chunk.js"
+    "static/js/main.50b6a97f.chunk.js"
   ]
 }
